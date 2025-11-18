@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Disorder Classification</title>
+    <style>
+/* General Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #F8F5F6; /* Soft pinkish grey */
+    color: #5A5A5A; /* Muted dark grey */
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    background-color: #FFF5F8; /* Very light pink */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Header Styling */
+h2 {
+    color: #8B4C5B; /* Deep mauve */
+    font-weight: bold;
+}
+
+p {
+    color: #7D6D75; /* Soft warm grey */
+}
+
+/* Form Styling */
+.form-group label {
+    color: #8B4C5B; /* Deep mauve */
+    font-weight: 500;
+}
+
+.form-control {
+    border: 1px solid #D1C2C8; /* Light mauve-grey */
+    border-radius: 5px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: border-color 0.3s;
+}
+
+.form-control:focus {
+    border-color: #B07A8B; /* Soft mauve */
+    box-shadow: 0 0 5px rgba(176, 122, 139, 0.4);
+}
+
+/* Button Styling */
+button {
+    background-color: #B07A8B; /* Soft mauve */
+    border: none;
+    color: white;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #9E5D75; /* Slightly darker mauve */
+}
+
+/* Prediction Results Styling */
+.mt-4 h4 {
+    color: #8B4C5B; /* Deep mauve */
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    background-color: #F0E2E6; /* Soft lavender-pink */
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    color: #5A5A5A;
+}
+
+ul li strong {
+    color: #B07A8B; /* Soft mauve */
+}
+
+</style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">Mental Disorder Classification</h2>
+        <p class="text-center">Enter the symptoms to get the classification results from different models.</p>
+        
+        <form action="/predict" method="post">
+            <!-- Input fields for each symptom based on the dataset columns -->
+             <div class="col-md-6 form-group">
+                        <label for="Sadness">Sadness Level</label>
+                        <input type="number" step="0.1" class="form-control" id="Sadness" name="Sadness" required>
+                    </div>
+            <div class="col-md-6 form-group">
+                        <label for="Euphoric">Euphoric Level</label>
+                        <input type="number" step="0.1" class="form-control" id="Euphoric" name="Euphoric" required>
+                    </div>
+            <div class="form-group">
+                <label for="Exhausted">Exhausted Level</label>
+                <input type="number" step="0.1" class="form-control" id="Exhausted" name="Exhausted" required>
+            </div>
+            <div class="form-group">
+                <label for="SleepDissorder">Sleep Disorder Level</label>
+                <input type="number" step="0.1" class="form-control" id="SleepDissorder" name="Sleep dissorder" required>
+            </div>
+            <div class="form-group">
+                <label for="MoodSwing">Mood Swing Level</label>
+                <input type="number" step="0.1" class="form-control" id="MoodSwing" name="Mood Swing" required>
+            </div>
+            <div class="form-group">
+                <label for="SuicidalThoughts">Suicidal Thoughts Level</label>
+                <input type="number" step="0.1" class="form-control" id="SuicidalThoughts" name="Suicidal thoughts" required>
+            </div>
+            <div class="form-group">
+                <label for="Anorxia">Anorexia Level</label>
+                <input type="number" step="0.1" class="form-control" id="Anorxia" name="Anorxia" required>
+            </div>
+            <div class="form-group">
+                <label for="AuthorityRespect">Authority Respect Level</label>
+                <input type="number" step="0.1" class="form-control" id="AuthorityRespect" name="Authority Respect" required>
+            </div>
+            <div class="form-group">
+                <label for="TryExplanation">Try Explanation Level</label>
+                <input type="number" step="0.1" class="form-control" id="TryExplanation" name="Try-Explanation" required>
+            </div>
+            <div class="form-group">
+                <label for="AggressiveResponse">Aggressive Response Level</label>
+                <input type="number" step="0.1" class="form-control" id="AggressiveResponse" name="Aggressive Response" required>
+            </div>
+            <div class="form-group">
+                <label for="IgnoreMoveOn">Ignore & Move-On Level</label>
+                <input type="number" step="0.1" class="form-control" id="IgnoreMoveOn" name="Ignore & Move-On" required>
+            </div>
+            <div class="form-group">
+                <label for="NervousBreakDown">Nervous Breakdown Level</label>
+                <input type="number" step="0.1" class="form-control" id="NervousBreakDown" name="Nervous Break-down" required>
+            </div>
+            <div class="form-group">
+                <label for="AdmitMistakes">Admit Mistakes Level</label>
+                <input type="number" step="0.1" class="form-control" id="AdmitMistakes" name="Admit Mistakes" required>
+            </div>
+            <div class="form-group">
+                <label for="Overthinking">Overthinking Level</label>
+                <input type="number" step="0.1" class="form-control" id="Overthinking" name="Overthinking" required>
+            </div>
+            <div class="form-group">
+                <label for="SexualActivity">Sexual Activity Level</label>
+                <input type="number" step="0.1" class="form-control" id="SexualActivity" name="Sexual Activity" required>
+            </div>
+            <div class="form-group">
+                <label for="Concentration">Concentration Level</label>
+                <input type="number" step="0.1" class="form-control" id="Concentration" name="Concentration" required>
+            </div>
+            <div class="form-group">
+                <label for="Optimisim">Optimism Level</label>
+                <input type="number" step="0.1" class="form-control" id="Optimisim" name="Optimisim" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Predict</button>
+        </form>
+
+        <!-- Display prediction results if available -->
+        {% if prediction_results %}
+            <div class="mt-4">
+                <h4>Prediction Results:</h4>
+                <ul>
+                    <li><strong>Bagging Model Prediction:</strong> {{ prediction_results['Bagging Model Prediction'] }}</li>
+                    <li><strong>Boosting Model Prediction:</strong> {{ prediction_results['Boosting Model Prediction'] }}</li>
+                    <li><strong>Random Forest Model Prediction:</strong> {{ prediction_results['Random Forest Model Prediction'] }}</li>
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
